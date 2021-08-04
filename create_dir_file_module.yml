@@ -1,0 +1,9 @@
+---
+- name: create dir
+  hosts: all
+  tasks:
+  - name: "itest"
+    file:
+     path: "foo"
+     state: directory
+

@@ -1,0 +1,10 @@
+---
+ - name: loops
+   hosts: all
+   tasks:
+    - name: sample loops
+      command: mkdir {{ item }}
+      with_items:
+        - dir1
+        - dir2
+        - dir3

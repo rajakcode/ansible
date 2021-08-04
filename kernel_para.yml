@@ -1,0 +1,15 @@
+---
+- name: Setting Kernel using sysctl module
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: vm.swappiness
+    sysctl:
+      name=vm.swappiness
+      value=31
+      state=present
+  - name: tcp.keepalive
+    sysctl:
+      name: net.ipv4.tcp_keepalive_intvl
+      value: '74'
+      state: present

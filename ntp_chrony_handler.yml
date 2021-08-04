@@ -1,0 +1,28 @@
+- hosts: all
+  vars:
+   ntp_server1: 192.168.0.3
+  tasks:
+   - name: Remove chrony
+     yum:
+      name=chrony
+      state=absent
+   
+   - name: install ntp
+     yum:
+      name=ntp
+      state=present
+
+   - name: copy ntp conf
+     copy:
+      src=ntp.conf
+      dest=/etc/ntp.conf
+      backup=yes
+     notify: start_ntp
+
+  handlers:
+   - name: start_ntp
+     service:
+      name=ntpd
+      state=restarted
+      enabled=yes
+     

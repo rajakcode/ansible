@@ -1,0 +1,5 @@
+- hosts: all
+  name: Adding user
+  tasks:
+   - user: name="zulu" password='$1$abcde$Pl8NWJrExd1MnjHGUM4cE/'
+

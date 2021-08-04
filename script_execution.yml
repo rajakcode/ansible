@@ -1,0 +1,24 @@
+---
+
+- hosts: all
+  tasks:
+
+  - name: copy script
+    copy: 
+      src: test.sh
+      dest: /home/dxc_ansible 
+      mode: 0777 
+
+  - name: execute script
+    command: sh /home/dxc_ansible/test.sh
+  
+  - name: find output file
+    shell: (cd /home/dxc_ansible; find audit*.txt)
+    register: file_copy
+   
+  - debug:
+      var: file_copy  
+
+  - name: fetch output
+    fetch: src=/home/dxc_ansible/{{ item }} dest=/home/dxc_ansible/ mode=0777 flat=yes
+    with_items: "{{ file_copy.stdout_lines }}"

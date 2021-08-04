@@ -1,0 +1,11 @@
+---
+ - name: cmdline
+   hosts: all
+   vars_prompt:
+    name: var1
+    prompt: Enter any value
+   tasks:
+    - name: Print
+      debug:
+       msg: "{{ var1 }}"
+

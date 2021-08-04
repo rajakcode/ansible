@@ -1,0 +1,17 @@
+---
+ - name: Simple playbook
+   hosts: all 
+   #gather_facts: no
+   tasks:
+    - name: uname
+      shell: uname -i
+      register: name
+   
+    - name: hostname 
+      shell: hostname
+      register: host_name
+  
+    - debug:
+        #var: host_name.stdout,name.stdout
+        msg: "The hostname is {{ host_name.stdout }}, Architecture is {{  name.stdout }}"
+        

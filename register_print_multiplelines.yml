@@ -1,0 +1,13 @@
+---
+ - name: Playbook to show register and loop
+   hosts: all
+   tasks:
+    - name: List files
+      shell: ls -l 
+      register: files
+
+ 
+    - name: Print output
+      debug:
+        msg: "{{ files.stdout_lines }}"
+    

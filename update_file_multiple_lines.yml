@@ -1,0 +1,13 @@
+---
+ - name: Update lines in file
+   hosts: all
+   tasks:
+    - name: update file
+      lineinfile:
+        path: foo.conf
+        state: present
+        line: "{{ item  }}"
+      with_items:
+         - '192.168.0.1'
+         - '192.168.0.2'
+         - '192.168.0.3'

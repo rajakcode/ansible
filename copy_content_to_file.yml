@@ -1,0 +1,11 @@
+---
+ - name: file content copied using variable
+   hosts: all
+   vars:
+    content1: "This content is copied by variables\n"
+   tasks:
+    - name: copy
+      copy:
+       content: "{{  content1 }}"
+       dest: foo.conf
+

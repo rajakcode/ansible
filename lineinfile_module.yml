@@ -1,0 +1,14 @@
+---
+ - name: test
+   hosts: all
+   tasks:
+
+    - name: copy test
+      lineinfile:
+       path: /etc/hosts
+       backup: yes
+       create: yes
+       line: "{{ item }}"
+       insertbefore: '\[Tools\]'
+      with_items:
+       - '192.168.0.66 vagrant55'
