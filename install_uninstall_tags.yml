@@ -1,0 +1,20 @@
+---
+
+- hosts: all
+  vars:
+    pa: "telnet"
+  tasks:
+  - name: install telnet
+    tags: install
+    yum:
+      name: 
+        - "{{ pa }}"
+      state: present
+
+  - name: uninstall telnet
+    tags: uninstall
+    yum:
+      name:
+        - "{{ pa }}"
+      state: absent
+ 

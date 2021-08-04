@@ -1,0 +1,17 @@
+---
+
+- hosts: all
+  tasks:
+  
+  - name: edit email in ntpd conf
+    lineinfile:
+      path: /etc/ntp.conf
+      regexp: '^email'
+      line: email root@localhost.com
+    register: ntp
+
+  - name: restart ntpd
+    service:
+      name: ntpd
+      state: restarted
+    when: ntp.changed

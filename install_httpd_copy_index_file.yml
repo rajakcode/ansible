@@ -1,0 +1,23 @@
+---
+
+- hosts: all
+  tasks:
+  
+  - name: install httpd
+    yum:
+       name: httpd
+       state: present
+
+
+  - name: copy file
+    copy:
+       src: index.html
+       dest: /var/www/html/index.html
+       owner: root
+       group: root
+       mode: 0644
+
+  - name: start service
+    service:
+         name: httpd
+         state: started

@@ -1,0 +1,14 @@
+---
+
+- hosts: all
+  tasks: 
+
+  - shell: /usr/bin/uptime
+    register: result
+
+  - name: print
+    debug:
+      msg: "{{ result.stdout }}"
+
+
+

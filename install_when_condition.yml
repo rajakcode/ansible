@@ -1,0 +1,16 @@
+---
+
+- hosts: all
+  tasks:
+     
+     - name: install telnet in vagrant1
+       yum:
+         name: telnet
+         state: present
+       when: ansible_nodename=="vagrant1"
+
+     - name: install httpd in vagrant2
+       yum:
+         name: httpd
+         state: present
+       when: ansible_nodename=="vagrant2"
