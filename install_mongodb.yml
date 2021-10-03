@@ -1,0 +1,18 @@
+---
+
+- hosts: all
+  vars_files:
+    - vars.yml
+
+  tasks:
+  - name: Download MongoDB
+    get_url:
+      url: https://fastdl.mongodb.org/linux/mongodb-shell-linux-x86_64-rhel70-5.0.3.tgz
+      dest: "{{ download_dir }}/mongodb-{{ mongo_version }}.tgz"
+
+  - name: Expand Mongo
+    unarchive:
+      src: "{{ download_dir }}/mongodb-{{ mongo_version }}.tgz"
+      dest: "{{ download_dir }}"
+      remote_src: true
+      
