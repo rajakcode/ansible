@@ -1,0 +1,13 @@
+---
+
+- hosts: all
+  become: yes
+  tasks:
+
+  - name: install softwares
+    yum:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - git
+      - telnet
