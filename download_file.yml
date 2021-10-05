@@ -1,0 +1,23 @@
+---
+
+- hosts: all
+  tasks:
+  - name : addline
+    lineinfile:
+      dest: ~/.bashrc
+      line: test=300
+      line: test
+      state: absent
+
+  - name: test
+    shell: source ~/.bashrc && echo $test
+    register: foo
+
+  - name: print
+    debug:
+      msg: "Value is {{ foo.stdout }}"
+
+  - name: Download file
+    get_url:
+      url: http://ipv4.download.thinkbroadband.com/10MB.zip
+      dest: /tmp

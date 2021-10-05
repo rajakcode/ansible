@@ -1,0 +1,26 @@
+---
+
+- hosts: all
+  #delegate_to: localhost
+  tasks:
+  
+  - name: uptime
+    shell: uptime|cut -d "," -f1|awk '{print $2  " " $3 " " $4}'
+    register: uptime
+
+  - debug:
+      msg: "{{ inventory_hostname }} - {{ uptime.stdout }}"
+
+  - name: create file
+    file:
+      dest: /tmp/test.csv
+      state: absent
+      state: touch
+    delegate_to: localhost
+
+  - name: Add to file
+    lineinfile:
+      dest: /tmp/test.csv
+      line: "{{ inventory_hostname }},{{ uptime.stdout }}"
+      insertafter: EOF
+    delegate_to: localhost

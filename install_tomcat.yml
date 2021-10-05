@@ -1,0 +1,24 @@
+---
+
+- hosts: all
+  become: yes
+  tasks:
+
+  - name: install java
+    yum:
+      name: java
+      state: present
+  - name: Download  tomcat
+    get_url:
+      url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.54/bin/apache-tomcat-9.0.54.tar.gz
+      dest: /tmp
+      validate_certs: no
+
+  - name: untar
+    unarchive:
+      src: /tmp/apache-tomcat-9.0.54.tar.gz
+      dest: /opt
+      remote_src: yes
+
+  - name: start tomcat
+    shell: nohup sh /opt/apache-tomcat-9.0.54/bin/startup.sh
